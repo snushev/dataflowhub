@@ -137,8 +137,10 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'DataFlowHub',
-    'DESCRIPTION': 'DRF backend with ETL elements',
+    'TITLE': 'DataFlowHub API ',
+    'DESCRIPTION': 'ETL Automation Hub - Django + DRF + Celery + Redis + Cloud',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'

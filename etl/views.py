@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import ETLJob
+from .serializers import ETLJobSerializer
 
-# Create your views here.
+class ETLJobViewset(viewsets.ModelViewSet):
+    queryset = ETLJob.objects.all()
+    serializer_class = ETLJobSerializer
