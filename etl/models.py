@@ -24,3 +24,13 @@ class ETLJob(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.status})"
+
+class ETLJobRun(models.Model):
+    job = models.ForeignKey(ETLJob, on_delete=models.CASCADE, related_name='runs')
+    started_at = models.DateTimeField(auto_now_add=True)
+    finished_at = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(max_length=10, choices=ETLJob.STATUSES, default='pending')
+    log = models.TextField(blank=True, null=True)
+
+    def __str__(self) -> str:
+        return f"Run of {self.job.name} at {self.started_at}"

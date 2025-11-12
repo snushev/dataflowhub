@@ -1,25 +1,33 @@
 import requests
 from celery import shared_task
-from .models import ETLJob
+from .models import ETLJob, ETLJobRun
 from django.utils import timezone
 
-URL = 'https://jsonplaceholder.typicode.com/todos'
 
 @shared_task
 def run_etl_job(job_id):
     job = ETLJob.objects.get(id=job_id)
-    job.status = 'running'
-    job.save()
+    run = ETLJobRun.objects.create(job=job, status='running', log='Starting ETL job...\n')
 
     try:
-        response = requests.get(URL)
-        data = response.json()
-        print(f"Fetched {len(data)} records from API.")
+        if job.source_type == 'api':
+            url = job.source_config.get('url')
+            response = requests.get(url)
+            data = response.json()
+            run.log += f"Fetched {len(data)} records from {url}\n"
+        else:
+            run.log += "Unsupported source type\n" 
 
+        run.status = 'success'
         job.status = 'success'
         job.last_run = timezone.now()
         job.save()
+        run.log += "Job.finished successfully.\n"
+
     except Exception as e:
+        run.status = 'failed'
         job.status = 'failed'
-        job.save()
-        print(f"ETL job {job_id} failed {e}")
+        run.log += f"Error: {str(e)}\n"
+
+    run.finished_at = timezone.now()
+    run.save()
