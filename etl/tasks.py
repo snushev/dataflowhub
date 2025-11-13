@@ -2,6 +2,7 @@ import requests
 from celery import shared_task
 from .models import ETLJob, ETLJobRun
 from django.utils import timezone
+from .transformer import transform_data
 
 
 @shared_task
@@ -15,6 +16,10 @@ def run_etl_job(job_id):
             response = requests.get(url)
             data = response.json()
             run.log += f"Fetched {len(data)} records from {url}\n"
+
+            transformed = transform_data(data)
+            run.result = transformed
+
         else:
             run.log += "Unsupported source type\n" 
 

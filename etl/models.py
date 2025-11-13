@@ -31,6 +31,7 @@ class ETLJobRun(models.Model):
     finished_at = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=10, choices=ETLJob.STATUSES, default='pending')
     log = models.TextField(blank=True, null=True)
+    result = models.JSONField(blank=True, null=True)
 
     def __str__(self) -> str:
         return f"Run of {self.job.name} at {self.started_at}"
