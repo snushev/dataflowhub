@@ -64,7 +64,7 @@ python -m venv .venv
 source .venv/bin/activate  # on Windows: .venv\Scripts\activate
 
 # 3️⃣ Install dependencies
-pip install -r requirements.txt
+pip install -r requirements.txt  # or: uv pip install -r requirements.txt
 
 # 4️⃣ Run Redis (Docker example)
 docker run -d -p 6379:6379 redis
