@@ -15,23 +15,23 @@ def run_etl_job(job_id):
             url = job.source_config.get('url')
             response = requests.get(url)
             data = response.json()
-            run.log += f"Fetched {len(data)} records from {url}\n"
+            run.log += f"Fetched {len(data)} records from {url}\n" # type: ignore
 
             transformed = transform_data(data)
-            run.result = transformed
+            run.result = transformed # type: ignore
         else:
-            run.log += "Unsupported source type\n" 
+            run.log += "Unsupported source type\n" # type: ignore
 
         run.status = 'success'
         job.status = 'success'
         job.last_run = timezone.now()
         job.save()
-        run.log += "Job.finished successfully.\n"
+        run.log += "Job.finished successfully.\n" # type: ignore
 
     except Exception as e:
         run.status = 'failed'
         job.status = 'failed'
-        run.log += f"Error: {str(e)}\n"
+        run.log += f"Error: {str(e)}\n" # type: ignore
 
     run.finished_at = timezone.now()
     run.save()
