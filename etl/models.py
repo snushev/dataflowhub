@@ -35,3 +35,4 @@ class ETLJobRun(models.Model):
 
     def __str__(self) -> str:
         return f"Run of {self.job.name} at {self.started_at}"
+

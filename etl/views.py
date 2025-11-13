@@ -19,4 +19,3 @@ class ETLJobViewset(viewsets.ModelViewSet):
 class ETLJobRunViewset(viewsets.ReadOnlyModelViewSet):
     queryset = ETLJobRun.objects.all()
     serializer_class = ETLJobRunSerializer
-

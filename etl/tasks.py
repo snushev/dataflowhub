@@ -19,7 +19,6 @@ def run_etl_job(job_id):
 
             transformed = transform_data(data)
             run.result = transformed
-
         else:
             run.log += "Unsupported source type\n" 
 
