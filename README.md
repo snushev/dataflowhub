@@ -16,9 +16,11 @@ The goal is to build a flexible foundation for ETL jobs that can be defined and 
 ✅ **Redis** broker for asynchronous processing  
 ✅ **Swagger/OpenAPI** documentation  
 ✅ ETL jobs from **API sources**  
+✅ **Filtering** and **searching** in API  
 ✅ Automatic **transformation and normalization** of JSON with **pandas.json_normalize()**  
 ✅ Execution logging and statuses (`pending`, `running`, `success`, `failed`)  
 ✅ **Pagination** of results  
+✅ JWT Authentication
 ✅ Modular architecture – separation between `core/` and `etl/` apps
 
 ---
@@ -28,9 +30,8 @@ The goal is to build a flexible foundation for ETL jobs that can be defined and 
 🔹 ETL from **databases** (PostgreSQL, MySQL, etc.)  
 🔹 ETL from **file sources** (CSV, Excel, JSON)  
 🔹 **Authentication and Role-based access** – different users with different permissions  
-🔹 **Filtering, searching, throttling** in API  
+🔹 **Throttling** in API  
 🔹 **Docker** containerization  
-🔹 **.env configuration** for production  
 🔹 **CI/CD pipeline** (GitHub Actions)  
 🔹 **Flake8 / Ruff** for linting  
 🔹 **Pytest** for unit and integration tests  
@@ -46,7 +47,7 @@ The goal is to build a flexible foundation for ETL jobs that can be defined and 
 | Async Tasks     | Celery                           |
 | Message Broker  | Redis                            |
 | Data Processing | Pandas                           |
-| Database        | SQLite (dev) → PostgreSQL (prod) |
+| Database        | PostgreSQL (prod)                |
 | API Docs        | drf-spectacular                  |
 | Environment     | Python 3.12+                     |
 
@@ -85,8 +86,6 @@ Swagger Docs → [http://127.0.0.1:8000/api/schema/swagger-ui/](http://127.0.0.1
 | Step                          | Description                               |
 | ----------------------------- | ----------------------------------------- |
 | 🧩 Add DB/File source support | Create specialized tasks and transformers |
-| 🔒 Add Authentication         | JWT or DRF Token-based system             |
-| 🧮 Add Filtering & Searching  | Via DRF filters and query params          |
 | 🐳 Add Docker setup           | docker-compose for web + redis + celery   |
 | ⚙️ Add CI/CD                  | GitHub Actions workflow                   |
 | 🧪 Add Tests                  | With Pytest and Factory Boy               |
@@ -104,6 +103,10 @@ dataflowhub/
 │   ├── models.py
 │   ├── tasks.py
 │   ├── transformer.py
+│   └── views.py
+├── users/                 # Main logic for login and register users
+│   ├── models.py
+│   ├── serializers.py
 │   └── views.py
 │
 ├── dataflowhub/           # Django project config
