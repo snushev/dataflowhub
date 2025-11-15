@@ -21,7 +21,10 @@ The goal is to build a flexible foundation for ETL jobs that can be defined and 
 ✅ Execution logging and statuses (`pending`, `running`, `success`, `failed`)  
 ✅ **Pagination** of results  
 ✅ JWT Authentication
-✅ Modular architecture – separation between `core/` and `etl/` apps
+✅ Modular architecture – separation between `core/`, `users/` and `etl/` apps
+✅ **Throttling** for request limitation
+✅ **Permissions** basic IsAuthenticated permissions
+✅ **Docker** and **Docker-compose** for quick start
 
 ---
 
@@ -29,9 +32,6 @@ The goal is to build a flexible foundation for ETL jobs that can be defined and 
 
 🔹 ETL from **databases** (PostgreSQL, MySQL, etc.)  
 🔹 ETL from **file sources** (CSV, Excel, JSON)  
-🔹 **Authentication and Role-based access** – different users with different permissions  
-🔹 **Throttling** in API  
-🔹 **Docker** containerization  
 🔹 **CI/CD pipeline** (GitHub Actions)  
 🔹 **Flake8 / Ruff** for linting  
 🔹 **Pytest** for unit and integration tests  
@@ -77,6 +77,28 @@ celery -A dataflowhub worker -l info
 python manage.py runserver
 ```
 
+## 🚀 Quick Start with Docker
+
+```bash
+# Clone repo
+git clone https://github.com/snushev/dataflowhub.git
+cd dataflowhub
+
+# Start everything
+docker-compose up -d
+
+# Run migrations
+docker-compose exec web python manage.py migrate
+
+# Create superuser
+docker-compose exec web python manage.py createsuperuser
+
+# Visit
+http://localhost:8000/api/schema/swagger-ui/
+```
+
+Done! 🎉
+
 Swagger Docs → [http://127.0.0.1:8000/api/schema/swagger-ui/](http://127.0.0.1:8000/api/schema/swagger-ui/)
 
 ---
@@ -86,7 +108,6 @@ Swagger Docs → [http://127.0.0.1:8000/api/schema/swagger-ui/](http://127.0.0.1
 | Step                          | Description                               |
 | ----------------------------- | ----------------------------------------- |
 | 🧩 Add DB/File source support | Create specialized tasks and transformers |
-| 🐳 Add Docker setup           | docker-compose for web + redis + celery   |
 | ⚙️ Add CI/CD                  | GitHub Actions workflow                   |
 | 🧪 Add Tests                  | With Pytest and Factory Boy               |
 | 🎯 Finalize Production Setup  | Environment configs, logs, and monitoring |
