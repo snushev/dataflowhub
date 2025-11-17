@@ -1,6 +1,6 @@
 # 🧠 DataFlowHub – Lightweight ETL System (Django + Celery + Redis)
 
-[![DRF](https://github.com/yourusername/dataflowhub/actions/workflows/DRF.yml/badge.svg)](https://github.com/yourusername/dataflowhub/actions/workflows/DRF.yml)
+[![DRF CI](https://github.com/snushev/dataflowhub/actions/workflows/DRF.yml/badge.svg)](https://github.com/snushev/dataflowhub/actions/workflows/DRF.yml)
 
 ## 📘 Overview
 
