@@ -2,13 +2,18 @@ from django.contrib.auth import authenticate
 from rest_framework import serializers
 from .models import User
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'is_verified', 'created_at', 'updated_at']
+        fields = ['id', 'username', 'email', 'first_name',
+                  'last_name', 'is_verified', 'created_at', 'updated_at']
+
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required=True, min_length=6)
+    password = serializers.CharField(write_only=True,
+                                     required=True,
+                                     min_length=6)
 
     class Meta:
         model = User
@@ -24,6 +29,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
         return user
 
+
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
@@ -33,9 +39,11 @@ class LoginSerializer(serializers.Serializer):
         password = data.get("password")
 
         if username and password:
-            user = authenticate(username=username, password=password)
+            user = authenticate(username=username,
+                                password=password)
             if not user:
-                raise serializers.ValidationError("Invalid username or password")
+                raise serializers.ValidationError(
+                    "Invalid username or password")
         else:
             raise serializers.ValidationError("Both fields are required")
 

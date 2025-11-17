@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def transform_data(data):
     try:
         df = pd.json_normalize(data)
@@ -7,4 +8,3 @@ def transform_data(data):
         return df.to_dict(orient='records')
     except Exception:
         return data
-    

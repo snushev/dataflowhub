@@ -1,5 +1,7 @@
 # 🧠 DataFlowHub – Lightweight ETL System (Django + Celery + Redis)
 
+[![DRF](https://github.com/yourusername/dataflowhub/actions/workflows/DRF.yml/badge.svg)](https://github.com/yourusername/dataflowhub/actions/workflows/DRF.yml)
+
 ## 📘 Overview
 
 **DataFlowHub** is a lightweight ETL (Extract–Transform–Load) backend built with **Django REST Framework**, designed to automate data extraction and processing tasks.  
@@ -25,15 +27,15 @@ The goal is to build a flexible foundation for ETL jobs that can be defined and 
 ✅ **Throttling** for request limitation
 ✅ **Permissions** basic IsAuthenticated permissions
 ✅ **Docker** and **Docker-compose** for quick start
+✅ **Flake8** for linting
+✅ **GitHub Actions** for basic CI/CD
 
 ---
 
 ## 🧩 Planned Features
 
 🔹 ETL from **databases** (PostgreSQL, MySQL, etc.)  
-🔹 ETL from **file sources** (CSV, Excel, JSON)  
-🔹 **CI/CD pipeline** (GitHub Actions)  
-🔹 **Flake8 / Ruff** for linting  
+🔹 ETL from **file sources** (CSV, Excel, JSON)
 🔹 **Pytest** for unit and integration tests  
 🔹 Full ETL configuration via **frontend interface** (optional)
 
@@ -108,7 +110,6 @@ Swagger Docs → [http://127.0.0.1:8000/api/schema/swagger-ui/](http://127.0.0.1
 | Step                          | Description                               |
 | ----------------------------- | ----------------------------------------- |
 | 🧩 Add DB/File source support | Create specialized tasks and transformers |
-| ⚙️ Add CI/CD                  | GitHub Actions workflow                   |
 | 🧪 Add Tests                  | With Pytest and Factory Boy               |
 | 🎯 Finalize Production Setup  | Environment configs, logs, and monitoring |
 
